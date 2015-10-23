@@ -12,7 +12,7 @@
         <!--Facebook stuff-->
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <!-- for sharing vidoes and stuff via the app...-->
-        <provider android:authorities="com.facebook.app.FacebookContentProviderSocialMeanDaYaIsCool"
+        <provider android:authorities="com.facebook.app.FacebookContentProvider956004047808627"
             android:name="com.facebook.FacebookContentProvider"
             android:exported="true" />
         <!-- for login and log out stuff-->
