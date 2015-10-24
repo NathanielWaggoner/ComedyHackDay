@@ -19,9 +19,10 @@ public class LauncherActivity extends AppCompatActivity {
 
     FragmentManager fragmentManager;
 
-//    FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FragmentManager.enableDebugLogging(true);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
         ButterKnife.bind(this);
@@ -31,20 +32,18 @@ public class LauncherActivity extends AppCompatActivity {
         Toolbar apptoolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(apptoolbar);
 
-
-        FragmentTransaction fragT = fragmentManager.beginTransaction();
-        LocationList ll = new LocationList();
+        LocationList ll = LocationList.createInstance();
         ll.setOnLocationSelectedListener(new LocationList.LocationSelectedListener() {
             public void onLocationSelected(Location location) {
+                QuestionsList fragment = QuestionsList.createInstance(location);
+
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                QuestionsList fragment = new QuestionsList(location);
-                fragmentTransaction.replace(R.id.fragment_display, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                fragmentTransaction.replace(R.id.fragment_display, fragment).addToBackStack(null).commit();
             }
         });
-        fragT.add(R.id.fragment_display, ll);
-        fragT.commit();
+
+        FragmentTransaction fragT = fragmentManager.beginTransaction();
+        fragT.add(R.id.fragment_display, ll).commit();
     }
 
     @Override
@@ -81,5 +80,14 @@ public class LauncherActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() == 0) {
+            super.onBackPressed();
+        } else  {
+            getFragmentManager().popBackStack();
+        }
     }
 }

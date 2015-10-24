@@ -32,7 +32,14 @@ public class QuestionsList extends Fragment {
 
     private Location currentLocation;
 
-    public QuestionsList(Location l) {
+    public static QuestionsList createInstance(Location l) {
+        QuestionsList ql = new QuestionsList();
+        ql.setLocation(l);
+        return ql;
+    }
+
+
+    public void setLocation(Location l) {
         currentLocation = l;
     }
 
@@ -55,6 +62,7 @@ public class QuestionsList extends Fragment {
     @Override public void onResume() {
         super.onResume();
         cView.animateDegree(180f, 3000, 1f);
+
 //        cView.dueNorth(3f);
 //        cView.dueSouth(2f);
     }

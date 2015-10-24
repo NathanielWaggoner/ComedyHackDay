@@ -27,8 +27,8 @@ public class LocationList extends Fragment {
     LocationAdapter mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
 
-    public LocationList() {
-        // Required empty public constructor
+    public static LocationList createInstance() {
+        return new LocationList();
     }
 
     @Override
