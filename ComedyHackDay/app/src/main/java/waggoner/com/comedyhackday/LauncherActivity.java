@@ -24,6 +24,7 @@ public class LauncherActivity extends AppCompatActivity {
 //    LoginButton loginButton;
     @Bind(R.id.fragment_display)
     ViewGroup fragmentDisplay;
+
     FragmentManager fragmentManager;
 
     FloatingActionButton fab;

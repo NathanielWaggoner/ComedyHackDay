@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
  * Created by nathanielwaggoner on 10/24/15.
  */
 public class QuestionsList extends Fragment {
-    String[] dataSet = new String[] {"Who is that man?","Why did marion barry have to die?"};
+    String[] dataSet = new String[] {"Who is that man?","Why did marion barry have to die?","What should I do when a duck poops on me?","Can I eat...?","I was offered drugs and I should?","I ran into my ex and...?"};
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
