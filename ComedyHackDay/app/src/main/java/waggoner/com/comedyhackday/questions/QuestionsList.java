@@ -32,7 +32,14 @@ public class QuestionsList extends Fragment {
 
     private Location currentLocation;
 
-    public QuestionsList(Location l) {
+    public static QuestionsList createInstance(Location l) {
+        QuestionsList ql = new QuestionsList();
+        ql.setLocation(l);
+        return ql;
+    }
+
+
+    public void setLocation(Location l) {
         currentLocation = l;
     }
 
