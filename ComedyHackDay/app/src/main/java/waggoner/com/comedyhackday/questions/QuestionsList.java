@@ -14,6 +14,7 @@ import waggoner.com.comedyhackday.R;
 import waggoner.com.comedyhackday.locations.Location;
 import waggoner.com.comedyhackday.view.CompassView;
 
+
 /**
  * Created by nathanielwaggoner on 10/24/15.
  */
@@ -38,7 +39,7 @@ public class QuestionsList extends Fragment {
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.questions_layout, container, false);
         ButterKnife.bind(this, view);
-        dataSet = QuestionFactory.generateDataSet();
+        dataSet = QuestionFactory.generateDataSet(this.getActivity(), "gtfo.txt", currentLocation);
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
@@ -46,7 +47,7 @@ public class QuestionsList extends Fragment {
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         // specify an adapter (see also next example)
-        mAdapter = new QuestionsAdapter(dataSet,this.getActivity());
+        mAdapter = new QuestionsAdapter(dataSet,this.getActivity(), cView);
         mRecyclerView.setAdapter(mAdapter);
         return view;
     }

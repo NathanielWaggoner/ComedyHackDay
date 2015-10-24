@@ -20,5 +20,5 @@
         android:orientation="vertical"
         tools:context=".LauncherActivity"
         tools:showIn="@layout/activity_launcher"></LinearLayout>
-    
+
 </LinearLayout>

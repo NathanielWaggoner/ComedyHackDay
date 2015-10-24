@@ -3,17 +3,13 @@ package waggoner.com.comedyhackday;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.facebook.appevents.AppEventsLogger;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import waggoner.com.comedyhackday.locations.Location;
 import waggoner.com.comedyhackday.locations.LocationList;
@@ -21,11 +17,9 @@ import waggoner.com.comedyhackday.questions.QuestionsList;
 
 public class LauncherActivity extends AppCompatActivity {
 
-    @Bind(R.id.fragment_display)
-    ViewGroup fragmentDisplay;
     FragmentManager fragmentManager;
 
-    FloatingActionButton fab;
+//    FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +30,7 @@ public class LauncherActivity extends AppCompatActivity {
         // neither toolbar or fab are supported by butterknife apparently =/
         Toolbar apptoolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(apptoolbar);
+
 
         FragmentTransaction fragT = fragmentManager.beginTransaction();
         LocationList ll = new LocationList();
@@ -55,7 +50,6 @@ public class LauncherActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);
     }
@@ -81,7 +75,6 @@ public class LauncherActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
