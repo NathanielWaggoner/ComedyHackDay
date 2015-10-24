@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        card_view:cardElevation="2sp"
+        card_view:cardUseCompatPadding="true"
         android:animateLayoutChanges="true"
         card_view:cardCornerRadius="2dp">
 
@@ -24,15 +26,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textColor="@color/black"
                 android:textSize="20dp"
+                android:background="@android:drawable/dialog_holo_light_frame"
                 android:textStyle="bold" />
 
-            <View
-                android:id="@+id/dividing_line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/dividing_line"
-                android:visibility="gone"></View>
+            <!--<View-->
+                <!--android:id="@+id/dividing_line"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/dividing_line"-->
+                <!--android:visibility="gone"></View>-->
 
             <LinearLayout
                 android:visibility="gone"
@@ -43,8 +47,8 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp" />
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp" />-->
 
 </LinearLayout>
