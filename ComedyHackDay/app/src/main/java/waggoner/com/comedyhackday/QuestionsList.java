@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
+import waggoner.com.comedyhackday.view.CompassView;
 
 /**
  * Created by nathanielwaggoner on 10/24/15.
@@ -18,6 +20,9 @@ public class QuestionsList extends Fragment {
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
+
+    @Bind(R.id.compass_view)
+    CompassView cView;
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.questions_layout, container, false);
@@ -33,5 +38,10 @@ public class QuestionsList extends Fragment {
         mAdapter = new QuestionsAdapter(dataSet);
         mRecyclerView.setAdapter(mAdapter);
         return view;
+    }
+
+    @Override public void onResume() {
+        super.onResume();
+        cView.animateDegree(180f, 1000, 1f);
     }
 }
