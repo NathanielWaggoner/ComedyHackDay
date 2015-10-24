@@ -1,4 +1,4 @@
-package waggoner.com.comedyhackday;
+package waggoner.com.comedyhackday.questions;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
+import waggoner.com.comedyhackday.R;
 
 /**
  * Created by nathanielwaggoner on 10/24/15.
@@ -33,7 +34,7 @@ public class QuestionsList extends Fragment {
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         // specify an adapter (see also next example)
-        mAdapter = new QuestionsAdapter(dataSet);
+        mAdapter = new QuestionsAdapter(dataSet,this.getActivity());
         mRecyclerView.setAdapter(mAdapter);
         return view;
     }
