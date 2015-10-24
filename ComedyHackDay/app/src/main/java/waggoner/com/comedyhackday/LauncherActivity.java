@@ -6,8 +6,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 import butterknife.ButterKnife;
@@ -15,6 +19,7 @@ import butterknife.InjectView;
 
 public class LauncherActivity extends AppCompatActivity {
 
+    CallbackManager callbackManager;
 
     @InjectView(R.id.login_button)
     LoginButton loginButton;
@@ -22,6 +27,7 @@ public class LauncherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_launcher);
         ButterKnife.inject(this);
 
@@ -38,6 +44,23 @@ public class LauncherActivity extends AppCompatActivity {
 //            }
 //        });
         loginButton.setReadPermissions("user_friends");
+
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
 
     }
 
