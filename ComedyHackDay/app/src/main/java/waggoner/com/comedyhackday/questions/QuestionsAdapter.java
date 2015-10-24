@@ -1,8 +1,10 @@
 package waggoner.com.comedyhackday.questions;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,8 +21,10 @@ import waggoner.com.comedyhackday.view.CompassView;
 /**
  * Created by nathanielwaggoner on 10/24/15.
  */
-public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder> {
+public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder> implements View.OnTouchListener{
     private Question[] mDataset;
+    static int currentQuestion=-1;
+    static int lastAnswer;
     CompassView cv;
     Context ctx;
     public static ViewHolder expandedView= null;
@@ -31,6 +35,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         // each data item is just a string in this case
         @Bind(R.id.question_text) TextView question;
         @Bind(R.id.answersHolder) LinearLayout answersHolder;
+        int position;
 //        @Bind(R.id.dividing_line) View dividingLine;
         public ViewHolder(View v) {
             super(v);
@@ -42,11 +47,16 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
             if(expandedView!=null) {
                 expandedView.answersHolder.setVisibility(View.GONE);
-//                expandedView.dividingLine.setVisibility(View.GONE);
+                for(int i = 0; i< answersHolder.getChildCount();i++){
+                    Button b = (Button) answersHolder.getChildAt(i);
+                    b.setTextColor(Color.BLACK);
+                }
+                lastAnswer = -1;
             }
             expandedView = this;
 //            expandedView.dividingLine.setVisibility(View.VISIBLE);
             answersHolder.setVisibility(View.VISIBLE);
+            currentQuestion = position;
         }
 
     }
@@ -56,6 +66,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         mDataset = myDataset;
         this.cv = cv;
         this.ctx = ctx;
+        cv.setOnTouchListener(this);
     }
 
     // Create new views (invoked by the layout manager)
@@ -78,6 +89,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         holder.question.setText(mDataset[position].questionText);
         LayoutInflater inflater = LayoutInflater.from(ctx);
         holder.answersHolder.removeAllViews();
+        holder.position = position;
+
         for(final Answer answer: mDataset[position].answers){
             Button answerText = (Button) inflater.inflate(R.layout.answer_text_view, null);
             answerText.setText(answer.text);
@@ -95,5 +108,59 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
     @Override
     public int getItemCount() {
         return mDataset.length;
+    }
+    int i = 0;
+    float viewRotation;
+    double fingerRotation;
+    double newFingerRotation;
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+
+        final float x = event.getX();
+        final float y = event.getY();
+
+        final float xc = cv.getWidth()/2;
+        final float yc = cv.getHeight()/2;
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                viewRotation = cv.getRotation();
+                fingerRotation = Math.toDegrees(Math.atan2(x - xc, yc - y));
+                break;
+            case MotionEvent.ACTION_MOVE:
+                newFingerRotation = Math.toDegrees(Math.atan2(x - xc, yc - y));
+
+                cv.animateDegree((float)(viewRotation + newFingerRotation - fingerRotation),0,0);
+                break;
+            case MotionEvent.ACTION_UP:
+                fingerRotation = newFingerRotation = 0.0f;
+                getBestAnswer();
+                break;
+        }
+        return true;
+    }
+
+    public void getBestAnswer() {
+        if(expandedView!=null) {
+            int answerLoc = -1;
+            int i = 0;
+            float minDistance = Float.MAX_VALUE;
+            for (Answer a: mDataset[currentQuestion].answers) {
+                float distance = Math.abs(Math.abs(a.fucks_given)-Math.abs(cv.getDegree()));
+                if(distance<minDistance) {
+                    minDistance  =distance;
+                    answerLoc = i;
+                }
+                i++;
+            }
+            if(lastAnswer!=-1) {
+                Button oldAnswer = (Button)expandedView.answersHolder.getChildAt(lastAnswer);
+                oldAnswer.setTextColor(Color.BLACK);
+            }
+            lastAnswer = answerLoc;
+            Button answer = (Button)expandedView.answersHolder.getChildAt(answerLoc);
+            answer.setTextColor(Color.RED);
+        }
+
     }
 }
