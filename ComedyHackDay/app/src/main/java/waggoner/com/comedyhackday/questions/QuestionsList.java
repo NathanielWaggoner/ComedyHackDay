@@ -46,7 +46,7 @@ public class QuestionsList extends Fragment {
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.questions_layout, container, false);
         ButterKnife.bind(this, view);
-        dataSet = QuestionFactory.generateDataSet(this.getActivity(), "gtfo.txt", currentLocation);
+        dataSet = QuestionFactory.generateDataSet(this.getActivity(), "locations.txt", currentLocation);
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);

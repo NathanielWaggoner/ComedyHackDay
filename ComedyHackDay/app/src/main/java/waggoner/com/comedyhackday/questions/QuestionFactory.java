@@ -47,7 +47,7 @@ public class QuestionFactory {
                     q = new Question(mLine,answers);
                     questions.add(q);
                 } else if(mLine.startsWith(ANSWER_START)) {
-                    int fucksGiven = Integer.valueOf(mLine.substring(fucksOffset_start,fucksOffset_end));
+                    float fucksGiven = 180f*(Integer.valueOf(mLine.substring(fucksOffset_start,fucksOffset_end))/100f);
                     String answer = mLine.substring(fucksOffset_end+1);
                     answers.add(new Answer("A:"+answer,fucksGiven));
                 }
