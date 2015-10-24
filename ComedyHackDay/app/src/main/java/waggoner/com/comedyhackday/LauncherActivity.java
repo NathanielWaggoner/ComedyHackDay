@@ -19,12 +19,10 @@ import butterknife.ButterKnife;
 public class LauncherActivity extends AppCompatActivity {
 
     //CallbackManager callbackManager;
-
-//    @InjectView(R.id.login_button)
-//    LoginButton loginButton;
+    //@InjectView(R.id.login_button)
+    //LoginButton loginButton;
     @Bind(R.id.fragment_display)
     ViewGroup fragmentDisplay;
-
     FragmentManager fragmentManager;
 
     FloatingActionButton fab;
