@@ -5,4 +5,5 @@
     <color name="colorAccent">#7c4dff</color>
     <color name="dividing_line">#7c4dff</color>
     <color name="background_color">#727272</color>
+    <color name="black">#ff000000</color>
 </resources>
