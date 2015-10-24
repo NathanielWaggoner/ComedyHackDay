@@ -1,19 +1,11 @@
 package waggoner.com.comedyhackday.view;
 
-import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.animation.AnticipateOvershootInterpolator;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.Interpolator;
-import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 
 import waggoner.com.comedyhackday.R;
@@ -42,7 +34,7 @@ public class CompassView extends ImageView {
     }
 
     public void animateDegree(float toDegree) {
-        animateDegree(toDegree, 1000);
+        animateDegree(toDegree, 2500);
     }
 
 
@@ -59,7 +51,7 @@ public class CompassView extends ImageView {
     }
 
     public void animateDegree(float toDegree, int duration) {
-        animateDegree(toDegree, duration, 0f);
+        animateDegree(toDegree, duration, 2f);
     }
 
     public void animateDegree(float toDegree, int duration, float severity) {
@@ -83,11 +75,8 @@ public class CompassView extends ImageView {
         // Load attributes
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.CompassView, defStyle, 0);
-
         mCurrentDegree = a.getFloat(R.styleable.CompassView_degree, 0.f);
-
         a.recycle();
-
     }
 
     @Override
