@@ -9,7 +9,6 @@ import waggoner.com.comedyhackday.Answer;
  */
 public class Question {
     String questionText;
-
     public Question(String questionText, ArrayList<Answer> answers) {
         this.answers = answers;
         this.questionText = questionText;

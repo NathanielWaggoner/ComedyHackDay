@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import waggoner.com.comedyhackday.Answer;
+import waggoner.com.comedyhackday.locations.Location;
 
 /**
  * Created by nathanielwaggoner on 10/24/15.
@@ -16,11 +17,12 @@ import waggoner.com.comedyhackday.Answer;
 public class QuestionFactory {
 
     public static String QUESTION_START ="Q:";
+    public static String LOCATION_START ="Location: ";
     public static String ANSWER_START ="A:";
     public static int fucksOffset_start =3;
     public static int fucksOffset_end = 6;
     public static String TAG = QuestionFactory.class.getName();
-    public static Question[] generateDataSet(Context ctx, String fileName){
+    public static Question[] generateDataSet(Context ctx, String fileName, Location location){
 
         ArrayList<Question> questions = new ArrayList<>();
         try {
@@ -31,7 +33,15 @@ public class QuestionFactory {
             String mLine;
             Question q;
             ArrayList<Answer> answers = new ArrayList<>();
+            String theLocaiton = "";
             while ((mLine = reader.readLine()) != null) {
+                if(mLine.startsWith(LOCATION_START)) {
+                    theLocaiton = mLine.replace(LOCATION_START,"");
+                }
+                if(!theLocaiton.equals(location.getName())) {
+                    continue;
+                }
+
                 if(mLine.startsWith(QUESTION_START)) {
                     answers = new ArrayList<>();
                     q = new Question(mLine,answers);
