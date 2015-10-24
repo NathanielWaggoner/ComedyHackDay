@@ -24,7 +24,7 @@ import waggoner.com.comedyhackday.view.CompassView;
 public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder> implements View.OnTouchListener{
     private Question[] mDataset;
     static int currentQuestion=-1;
-    int lastAnswer;
+    static int lastAnswer;
     CompassView cv;
     Context ctx;
     public static ViewHolder expandedView= null;
@@ -47,7 +47,11 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
             if(expandedView!=null) {
                 expandedView.answersHolder.setVisibility(View.GONE);
-//                expandedView.dividingLine.setVisibility(View.GONE);
+                for(int i = 0; i< answersHolder.getChildCount();i++){
+                    Button b = (Button) answersHolder.getChildAt(i);
+                    b.setTextColor(Color.BLACK);
+                }
+                lastAnswer = -1;
             }
             expandedView = this;
 //            expandedView.dividingLine.setVisibility(View.VISIBLE);
