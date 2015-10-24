@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -75,8 +76,9 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         // - replace the contents of the view with that element
         holder.question.setText(mDataset[position].questionText);
         LayoutInflater inflater = LayoutInflater.from(ctx);
+        holder.answersHolder.removeAllViews();
         for(final Answer answer: mDataset[position].answers){
-            TextView answerText = (TextView) inflater.inflate(R.layout.answer_text_view, null);
+            Button answerText = (Button) inflater.inflate(R.layout.answer_text_view, null);
             answerText.setText(answer.text);
             holder.answersHolder.addView(answerText);
             answerText.setOnClickListener(new View.OnClickListener() {

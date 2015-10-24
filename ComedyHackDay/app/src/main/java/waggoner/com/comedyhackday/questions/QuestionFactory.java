@@ -42,8 +42,6 @@ public class QuestionFactory {
                     answers.add(new Answer("A:"+answer,fucksGiven));
                 }
             }
-
-
         } catch(IOException e) {
             Log.e(TAG, Log.getStackTraceString(e));
         }
