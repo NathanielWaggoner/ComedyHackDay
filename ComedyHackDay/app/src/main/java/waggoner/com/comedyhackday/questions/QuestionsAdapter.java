@@ -39,6 +39,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
         @OnClick(R.id.card_view)
         void expandClick(View v) {
+
             if(expandedView!=null) {
                 expandedView.answersHolder.setVisibility(View.GONE);
                 expandedView.dividingLine.setVisibility(View.GONE);
