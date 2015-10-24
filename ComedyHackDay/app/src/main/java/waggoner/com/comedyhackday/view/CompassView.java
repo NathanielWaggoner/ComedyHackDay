@@ -98,12 +98,4 @@ public class CompassView extends View {
             mDrawable.draw(canvas);
         }
     }
-
-    public Drawable getExampleDrawable() {
-        return mDrawable;
-    }
-
-    public void setExampleDrawable(Drawable exampleDrawable) {
-        mDrawable = exampleDrawable;
-    }
 }
