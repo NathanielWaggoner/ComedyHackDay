@@ -64,6 +64,7 @@ public class CompassView extends ImageView {
         oa.setDuration(duration);
         oa.setInterpolator(new AnticipateOvershootInterpolator(severity, 4f));
         oa.start();
+        mCurrentDegree = toDegree;
     }
 
     public void setDegree(float degree) {
@@ -95,4 +96,9 @@ public class CompassView extends ImageView {
 
         super.onDraw(canvas);
     }
+
+    public float getDegree() {
+        return mCurrentDegree;
+    }
+
 }
