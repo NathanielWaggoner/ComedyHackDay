@@ -10,6 +10,8 @@ import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.BounceInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.OvershootInterpolator;
 
@@ -44,15 +46,31 @@ public class CompassView extends View {
     }
 
 
+    public void dueNorth(float severity) {
+        if (mCurrentDegree > 180) {
+            animateDegree(360f, 1000, severity);
+        } else {
+            animateDegree(0f, 1000, severity);
+        }
+    }
+
+    public void dueSouth(float severity) {
+        animateDegree(180f, 1000, severity);
+    }
+
     public void animateDegree(float toDegree, int duration) {
         animateDegree(toDegree, duration, 0f);
     }
 
     public void animateDegree(float toDegree, int duration, float severity) {
+        if (toDegree > 360f) {
+            toDegree = toDegree % 360f;
+        }
+
         ObjectAnimator oa;
         oa = ObjectAnimator.ofFloat(this, "degree", mCurrentDegree, toDegree);
         oa.setDuration(duration);
-        oa.setInterpolator(new OvershootInterpolator(severity));
+        oa.setInterpolator(new AnticipateOvershootInterpolator(severity, 4f));
         oa.start();
     }
 
