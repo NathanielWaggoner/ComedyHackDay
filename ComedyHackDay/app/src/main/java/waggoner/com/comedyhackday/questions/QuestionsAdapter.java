@@ -51,7 +51,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public  QuestionsAdapter(Question[] myDataset, Context ctx, CompassView cv) {
+    public  QuestionsAdapter(Question[] myDataset, Context ctx, CompassView cv ) {
         mDataset = myDataset;
         this.cv = cv;
         this.ctx = ctx;
