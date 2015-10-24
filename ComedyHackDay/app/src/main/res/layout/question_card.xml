@@ -24,31 +24,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:textStyle="bold"
                 android:lines="2"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <View
                 android:id="@+id/dividing_line"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/dividing_line">
-            </View>
+                android:background="@color/dividing_line"
+                android:visibility="gone"></View>
 
-            <ScrollView
-                android:id="@+id/answers_scroll"
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/answersHolder"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:visibility="gone">
-
-                <LinearLayout
-                    android:id="@+id/answersHolder"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                </LinearLayout>
-            </ScrollView>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

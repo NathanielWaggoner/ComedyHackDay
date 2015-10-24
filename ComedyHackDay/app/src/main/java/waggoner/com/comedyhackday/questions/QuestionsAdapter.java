@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -31,7 +30,6 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         // each data item is just a string in this case
         @Bind(R.id.question_text) TextView question;
         @Bind(R.id.answersHolder) LinearLayout answersHolder;
-        @Bind(R.id.answers_scroll) ScrollView answersScroll;
         @Bind(R.id.dividing_line) View dividingLine;
         public ViewHolder(View v) {
             super(v);
@@ -41,12 +39,12 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         @OnClick(R.id.card_view)
         void expandClick(View v) {
             if(expandedView!=null) {
-                expandedView.answersScroll.setVisibility(View.GONE);
+                expandedView.answersHolder.setVisibility(View.GONE);
                 expandedView.dividingLine.setVisibility(View.GONE);
             }
             expandedView = this;
             expandedView.dividingLine.setVisibility(View.VISIBLE);
-            answersScroll.setVisibility(View.VISIBLE);
+            answersHolder.setVisibility(View.VISIBLE);
         }
 
     }

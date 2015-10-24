@@ -18,7 +18,7 @@ public class QuestionFactory {
     public static String QUESTION_START ="Q:";
     public static String ANSWER_START ="A:";
     public static int fucksOffset_start =3;
-    public static int fucksOffset_end = 5;
+    public static int fucksOffset_end = 6;
     public static String TAG = QuestionFactory.class.getName();
     public static Question[] generateDataSet(Context ctx, String fileName){
 
@@ -34,13 +34,12 @@ public class QuestionFactory {
             while ((mLine = reader.readLine()) != null) {
                 if(mLine.startsWith(QUESTION_START)) {
                     answers = new ArrayList<>();
-                    q = new Question(mLine.replace(QUESTION_START,""),answers);
+                    q = new Question(mLine,answers);
                     questions.add(q);
                 } else if(mLine.startsWith(ANSWER_START)) {
                     int fucksGiven = Integer.valueOf(mLine.substring(fucksOffset_start,fucksOffset_end));
-                    String answer = mLine.substring(fucksOffset_end);
-
-                    answers.add(new Answer(answer,fucksGiven));
+                    String answer = mLine.substring(fucksOffset_end+1);
+                    answers.add(new Answer("A:"+answer,fucksGiven));
                 }
             }
 
