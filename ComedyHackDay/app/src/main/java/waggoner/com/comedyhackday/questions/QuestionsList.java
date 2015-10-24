@@ -62,6 +62,7 @@ public class QuestionsList extends Fragment {
     @Override public void onResume() {
         super.onResume();
         cView.animateDegree(180f, 3000, 1f);
+
 //        cView.dueNorth(3f);
 //        cView.dueSouth(2f);
     }

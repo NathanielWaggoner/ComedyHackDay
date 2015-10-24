@@ -38,16 +38,12 @@ public class LauncherActivity extends AppCompatActivity {
                 QuestionsList fragment = QuestionsList.createInstance(location);
 
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_display, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                fragmentTransaction.replace(R.id.fragment_display, fragment).addToBackStack(null).commit();
             }
         });
 
         FragmentTransaction fragT = fragmentManager.beginTransaction();
-        fragT.add(R.id.fragment_display, ll);
-        fragT.addToBackStack(null);
-        fragT.commit();
+        fragT.add(R.id.fragment_display, ll).commit();
     }
 
     @Override
@@ -84,5 +80,14 @@ public class LauncherActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() == 0) {
+            super.onBackPressed();
+        } else  {
+            getFragmentManager().popBackStack();
+        }
     }
 }
