@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import waggoner.com.comedyhackday.R;
+import waggoner.com.comedyhackday.locations.Location;
 import waggoner.com.comedyhackday.view.CompassView;
 
 /**
@@ -27,6 +28,12 @@ public class QuestionsList extends Fragment {
 
     @Bind(R.id.compass_view)
     CompassView cView;
+
+    private Location currentLocation;
+
+    public QuestionsList(Location l) {
+        currentLocation = l;
+    }
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.questions_layout, container, false);
@@ -46,6 +53,8 @@ public class QuestionsList extends Fragment {
 
     @Override public void onResume() {
         super.onResume();
-        cView.animateDegree(180f, 1000, 1f);
+        cView.animateDegree(180f, 3000, 1f);
+//        cView.dueNorth(3f);
+//        cView.dueSouth(2f);
     }
 }

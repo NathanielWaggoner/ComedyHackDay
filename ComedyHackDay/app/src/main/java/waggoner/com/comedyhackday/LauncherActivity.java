@@ -15,6 +15,8 @@ import com.facebook.appevents.AppEventsLogger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import waggoner.com.comedyhackday.locations.Location;
+import waggoner.com.comedyhackday.locations.LocationList;
 import waggoner.com.comedyhackday.questions.QuestionsList;
 
 public class LauncherActivity extends AppCompatActivity {
@@ -29,22 +31,25 @@ public class LauncherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
         ButterKnife.bind(this);
+
         fragmentManager = getFragmentManager();
         // neither toolbar or fab are supported by butterknife apparently =/
         Toolbar apptoolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(apptoolbar);
-        FloatingActionButton fab = ButterKnife.findById(this, R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+        FragmentTransaction fragT = fragmentManager.beginTransaction();
+        LocationList ll = new LocationList();
+        ll.setOnLocationSelectedListener(new LocationList.LocationSelectedListener() {
+            public void onLocationSelected(Location location) {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                QuestionsList fragment = new QuestionsList();
-                fragmentTransaction.add(R.id.fragment_display, fragment);
+                QuestionsList fragment = new QuestionsList(location);
+                fragmentTransaction.replace(R.id.fragment_display, fragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-                // add a new question and answer!
-                // need a question and answer dialog here.
             }
         });
+        fragT.add(R.id.fragment_display, ll);
+        fragT.commit();
     }
 
     @Override
