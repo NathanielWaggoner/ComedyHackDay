@@ -1,4 +1,4 @@
-package waggoner.com.comedyhackday;
+package waggoner.com.comedyhackday.questions;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -10,13 +10,17 @@ import android.view.ViewGroup;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import waggoner.com.comedyhackday.R;
 import waggoner.com.comedyhackday.view.CompassView;
 
 /**
  * Created by nathanielwaggoner on 10/24/15.
  */
 public class QuestionsList extends Fragment {
-    String[] dataSet = new String[] {"Who is that man?","Why did marion barry have to die?"};
+    Question[] dataSet;
+
+    //= new String[] {"Who is that man?","Why did marion barry have to die?","What should I do when a duck poops on me?","Can I eat...?","I was offered drugs and I should?","I ran into my ex and...?"};
+    @Bind(R.id.my_recycler_view)
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
@@ -27,7 +31,7 @@ public class QuestionsList extends Fragment {
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.questions_layout, container, false);
         ButterKnife.bind(this, view);
-        mRecyclerView = ButterKnife.findById(view,R.id.my_recycler_view);
+        dataSet = QuestionFactory.generateDataSet();
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
@@ -35,7 +39,7 @@ public class QuestionsList extends Fragment {
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         // specify an adapter (see also next example)
-        mAdapter = new QuestionsAdapter(dataSet);
+        mAdapter = new QuestionsAdapter(dataSet,this.getActivity());
         mRecyclerView.setAdapter(mAdapter);
         return view;
     }

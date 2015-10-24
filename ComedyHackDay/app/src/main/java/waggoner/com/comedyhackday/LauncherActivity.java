@@ -15,13 +15,10 @@ import com.facebook.appevents.AppEventsLogger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import waggoner.com.comedyhackday.questions.QuestionsList;
 
 public class LauncherActivity extends AppCompatActivity {
 
-    //CallbackManager callbackManager;
-
-//    @InjectView(R.id.login_button)
-//    LoginButton loginButton;
     @Bind(R.id.fragment_display)
     ViewGroup fragmentDisplay;
     FragmentManager fragmentManager;
@@ -30,8 +27,6 @@ public class LauncherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        FacebookSdk.sdkInitialize(getApplicationContext());
-//        callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_launcher);
         ButterKnife.bind(this);
         fragmentManager = getFragmentManager();
