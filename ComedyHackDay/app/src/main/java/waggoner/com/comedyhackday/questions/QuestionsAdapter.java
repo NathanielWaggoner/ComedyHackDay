@@ -2,7 +2,6 @@ package waggoner.com.comedyhackday.questions;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +14,16 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import waggoner.com.comedyhackday.Answer;
 import waggoner.com.comedyhackday.R;
+import waggoner.com.comedyhackday.view.CompassView;
 
 /**
  * Created by nathanielwaggoner on 10/24/15.
  */
 public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder> {
     private Question[] mDataset;
-
+    CompassView cv;
     Context ctx;
-    public static ScrollView expandedScroll= null;
+    public static ViewHolder expandedView= null;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -32,6 +32,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         @Bind(R.id.question_text) TextView question;
         @Bind(R.id.answersHolder) LinearLayout answersHolder;
         @Bind(R.id.answers_scroll) ScrollView answersScroll;
+        @Bind(R.id.dividing_line) View dividingLine;
         public ViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);
@@ -39,24 +40,23 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
         @OnClick(R.id.card_view)
         void expandClick(View v) {
-            Log.e("XappTest", "XappTest");
-            if(expandedScroll!=null) {
-                expandedScroll.setVisibility(View.GONE);
+            if(expandedView!=null) {
+                expandedView.answersScroll.setVisibility(View.GONE);
+                expandedView.dividingLine.setVisibility(View.GONE);
             }
-            expandedScroll = answersScroll;
+            expandedView = this;
+            expandedView.dividingLine.setVisibility(View.VISIBLE);
             answersScroll.setVisibility(View.VISIBLE);
         }
 
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public  QuestionsAdapter(Question[] myDataset, Context ctx) {
+    public  QuestionsAdapter(Question[] myDataset, Context ctx, CompassView cv) {
         mDataset = myDataset;
+        this.cv = cv;
         this.ctx = ctx;
     }
-
-
-
 
     // Create new views (invoked by the layout manager)
     @Override
@@ -72,14 +72,21 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.question.setText(mDataset[position].questionText);
-        for(Answer answer: mDataset[position].answers){
-            TextView answerText = new TextView(ctx);
+        LayoutInflater inflater = LayoutInflater.from(ctx);
+        for(final Answer answer: mDataset[position].answers){
+            TextView answerText = (TextView) inflater.inflate(R.layout.answer_text_view, null);
             answerText.setText(answer.text);
             holder.answersHolder.addView(answerText);
+            answerText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cv.animateDegree(answer.fucks_given);
+                }
+            });
         }
     }
 

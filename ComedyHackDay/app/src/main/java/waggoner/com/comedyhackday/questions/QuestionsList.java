@@ -39,7 +39,7 @@ public class QuestionsList extends Fragment {
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         // specify an adapter (see also next example)
-        mAdapter = new QuestionsAdapter(dataSet,this.getActivity());
+        mAdapter = new QuestionsAdapter(dataSet,this.getActivity(), cView);
         mRecyclerView.setAdapter(mAdapter);
         return view;
     }

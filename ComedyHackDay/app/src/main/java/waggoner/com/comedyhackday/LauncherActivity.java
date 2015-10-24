@@ -3,27 +3,21 @@ package waggoner.com.comedyhackday;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.facebook.appevents.AppEventsLogger;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import waggoner.com.comedyhackday.questions.QuestionsList;
 
 public class LauncherActivity extends AppCompatActivity {
 
-    @Bind(R.id.fragment_display)
-    ViewGroup fragmentDisplay;
     FragmentManager fragmentManager;
 
-    FloatingActionButton fab;
+//    FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,24 +27,16 @@ public class LauncherActivity extends AppCompatActivity {
         // neither toolbar or fab are supported by butterknife apparently =/
         Toolbar apptoolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(apptoolbar);
-        FloatingActionButton fab = ButterKnife.findById(this, R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                QuestionsList fragment = new QuestionsList();
-                fragmentTransaction.add(R.id.fragment_display, fragment);
-                fragmentTransaction.commit();
-                // add a new question and answer!
-                // need a question and answer dialog here.
-            }
-        });
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        QuestionsList fragment = new QuestionsList();
+        fragmentTransaction.add(R.id.fragment_display, fragment);
+        fragmentTransaction.commit();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);
     }
@@ -76,7 +62,6 @@ public class LauncherActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
