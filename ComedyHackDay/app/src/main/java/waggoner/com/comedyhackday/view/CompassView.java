@@ -14,6 +14,7 @@ import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.OvershootInterpolator;
+import android.widget.ImageView;
 
 import waggoner.com.comedyhackday.R;
 
@@ -21,8 +22,7 @@ import waggoner.com.comedyhackday.R;
 /**
  * Compass View that handles changing and animating rotation
  */
-public class CompassView extends View {
-    private Drawable mDrawable;
+public class CompassView extends ImageView {
 
     private float mCurrentDegree = 0;
 
@@ -86,18 +86,12 @@ public class CompassView extends View {
 
         mCurrentDegree = a.getFloat(R.styleable.CompassView_degree, 0.f);
 
-        if (a.hasValue(R.styleable.CompassView_drawable)) {
-            mDrawable = a.getDrawable(
-                    R.styleable.CompassView_drawable);
-            mDrawable.setCallback(this);
-        }
         a.recycle();
 
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
 
         // allocations per draw cycle.
         int paddingLeft = getPaddingLeft();
@@ -110,10 +104,6 @@ public class CompassView extends View {
 
         canvas.rotate(mCurrentDegree, (float) Math.floor(contentWidth/2.f), (float) Math.floor(contentHeight/2.f));
 
-        if (mDrawable != null) {
-            mDrawable.setBounds(paddingLeft, paddingTop,
-                    paddingLeft + contentWidth, paddingTop + contentHeight);
-            mDrawable.draw(canvas);
-        }
+        super.onDraw(canvas);
     }
 }

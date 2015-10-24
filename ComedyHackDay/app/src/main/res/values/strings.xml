@@ -3,6 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">956004047808627</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="give_a_fuck">All The Fucks!</string>
+    <string name="no_fucks_given">Who Gives a Fuck‽</string>
 </resources>

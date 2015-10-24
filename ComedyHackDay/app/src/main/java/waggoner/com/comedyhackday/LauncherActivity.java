@@ -21,7 +21,6 @@ public class LauncherActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        FragmentManager.enableDebugLogging(true);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
@@ -64,7 +63,6 @@ public class LauncherActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_launcher, menu);
         return true;
     }
 
